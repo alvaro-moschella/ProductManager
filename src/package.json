@@ -1,0 +1,26 @@
+{
+  "name": "product-manager",
+  "version": "0.0.3",
+  "description": "3er entrega de ProductManager",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alvaro-moschella/ProductManager.git"
+  },
+  "keywords": [
+    "express",
+    "backend",
+    "product",
+    "products",
+    "product-manager"
+  ],
+  "author": "Alvaro Moschella",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alvaro-moschella/ProductManager/issues"
+  },
+  "homepage": "https://github.com/alvaro-moschella/ProductManager#readme"
+}
