@@ -21,4 +21,21 @@ router.get('/products', async (req, res) => {
     }
   });
 
+  router.get('/products/:pid', async (req, res) => {
+    const { pid } = req.params;
+    try {
+      const products = await productManager.getProducts();
+      const product = products.find((p) => {
+      return p.id === parseInt(pid);
+    });
+    if (!product) {
+      res.status(404).json({ error: "El producto no existe" });
+    } else {
+      res.status(200).json(product);
+    }
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+});
+
 module.exports = router;
