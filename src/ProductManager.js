@@ -125,6 +125,7 @@ async deleteProduct(id) {
 
 }
 module.exports = ProductManager;
+
 async function test(run) {
 if (run) {
   const pm = new ProductManager('./Products.txt');
