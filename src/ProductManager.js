@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { v4 : uuidV4 } = require('uuid');
 
 class ProductManager {
 
@@ -7,34 +8,31 @@ class ProductManager {
     this.path = path;
   }
 
-  async addProduct(title, description, price, thumbnail, code, stock) {
-    if (!title, !description, !price, !thumbnail, !code, !stock) {
+  //async addProduct(title, description, code, price, status, stock, category, thumbnails) {
+  async addProduct(body) {
+    const { title, description, code, price, status = true, stock, category, thumbnails } = body;
+    if (!title, !description, !code, !price, !status, !stock, !category, !thumbnails) {
         throw new Error('Todos los campos son obligatorios.');
     }
 
     try {
       const products = await this.getFile(this.path);
-
       const codeExists = products.map((product) => product.code).includes(code);
   
       if (codeExists) {
           throw new Error(`Ya existe un producto con el código ${code}.`);
       }
   
-      const product = {
-        id: this.products.length + 1,
-        title,
-        description,
-        price,
-        thumbnail,
-        code,
-        stock,
+      const newProduct = {
+        id: uuidV4(),
+        ...body,
       };
-      this.products.push(product);
-      await this.saveFile(this.path, JSON.stringify(this.products));
+      products.push(newProduct);
+      await this.saveFile(this.path, JSON.stringify(products));
   
-      console.log(`Producto agregado correctamente con el id ${product.id}`);
-      
+      console.log(`Producto agregado correctamente con el id ${newProduct.id}`);
+      return newProduct;
+
     } catch (error) {
       throw new Error('Ocurrió un error al agregar un producto: ', error.message);
     }

@@ -38,4 +38,10 @@ router.get('/products', async (req, res) => {
     }
 });
 
+router.post('/products', async (req, res) => {
+  const { body } = req;
+  const newProduct = await productManager.addProduct(body);
+  res.status(201).json(newProduct);
+});
+
 module.exports = router;
