@@ -3,7 +3,7 @@ const { v4 : uuidV4 } = require('uuid');
 const ProductManager = require('../ProductManager');
 
 const router = Router();
-const productManager = new ProductManager(__dirname + '/../Products.txt');
+const productManager = new ProductManager(__dirname + '/../productos.json');
 
 router.get('/products', async (req, res) => {
     try {
