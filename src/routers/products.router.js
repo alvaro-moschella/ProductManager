@@ -44,4 +44,16 @@ router.post('/products', async (req, res) => {
   res.status(201).json(newProduct);
 });
 
+router.put('/products/:pid', async (req, res) => {
+  const { pid } = req.params;
+  const { body } = req;
+
+  try {
+    const updatedProduct = await productManager.updateProduct(pid, body);
+    res.status(200).json(updatedProduct);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;

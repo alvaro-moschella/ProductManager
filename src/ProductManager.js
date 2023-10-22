@@ -8,11 +8,10 @@ class ProductManager {
     this.path = path;
   }
 
-  //async addProduct(title, description, code, price, status, stock, category, thumbnails) {
   async addProduct(body) {
     const { title, description, code, price, status = true, stock, category, thumbnails } = body;
-    if (!title, !description, !code, !price, !status, !stock, !category, !thumbnails) {
-        throw new Error('Todos los campos son obligatorios.');
+    if (!title, !description, !code, !price, !status, !stock, !category) {
+        throw new Error(`Todos los campos son obligatorios a excepción de 'thumbnails'.`);
     }
 
     try {
@@ -76,33 +75,46 @@ class ProductManager {
   }
 
   async updateProduct(id, data) {
-    const { title, description, price, thumbnail, code, stock } = data;
-    const products = await this.getFile(this.path);
-    const position = products.findIndex((p) => p.id === id);
-    if (position === -1) {
-      throw new Error('Producto no encontrado');
-    }
-    if (title) {
-      products[position].title = title;
-    }
-    if (description) {
-      products[position].description = description;
-    }
-    if (price) {
-      products[position].price = price;
-    }
-    if (thumbnail) {
-      products[position].thumbnail = thumbnail;
-    }
-    if (code) {
-      products[position].code = code;
-    }
-    if (stock) {
-      products[position].stock = stock;
-    }
+  const { title, description, code, price, status = true, stock, category, thumbnails } = data;
+  const products = await this.getFile(this.path);
+  const productIndex = products.findIndex((p) => p.id === id);
 
-    await this.saveFile(this.path, JSON.stringify(products));
-    console.log('Producto actualizado correctamente');
+  if (productIndex === -1) {
+    throw new Error('Producto no encontrado');
+  }
+
+  const updatedProduct = products[productIndex];
+
+  if (title) {
+    updatedProduct.title = title;
+  }
+  if (description) {
+    updatedProduct.description = description;
+  }
+  if (code) {
+    updatedProduct.code = code;
+  }
+  if (price) {
+    updatedProduct.price = price;
+  }
+  if (status) {
+    updatedProduct.status = status;
+  }
+  if (stock) {
+    updatedProduct.stock = stock;
+  }
+  if (category) {
+    updatedProduct.category = category;
+  }
+  if (thumbnails) {
+    updatedProduct.thumbnails = thumbnails;
+  }
+
+  products[productIndex] = updatedProduct;
+
+  await this.saveFile(this.path, JSON.stringify(products));
+  console.log('Producto actualizado correctamente');
+  return updatedProduct;
 }
 
 async deleteProduct(id) {
