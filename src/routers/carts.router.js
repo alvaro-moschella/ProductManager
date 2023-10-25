@@ -15,7 +15,8 @@ router.get('/carts/:cid', async (req, res) => {
   if (!cart) {
     res.status(404).json({ error: "El carrito no existe" });
   } else {
-    res.status(200).json(cart);
+    const cartProducts = { products: cart.products };
+    res.status(200).json(cartProducts);
   }
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -30,41 +31,30 @@ router.post('/carts/:cid/product/:pid', async (req, res) => {
   if (!cart) {
     res.status(404).json({ error: "El carrito no existe" });
   } else {
-    try {
-      const products = await productManager.getProducts();
-      const product = products.find((p) => {
-      return p.id === parseInt(pid);
-    });
+    const product = await productManager.getProductById(pid);
     if (!product) {
       res.status(404).json({ error: "El producto no existe" });
     } else {
 
-      console.log('cart esta', cart);
-//const productInCart = cart.cart.products.find(item => item.product === pid);
+      const productIsInCart = cart.products.find(item => item.product === pid);
 
-const productInCart = cart.products.find(item => item.product === pid);
+      if (productIsInCart) {
+        productIsInCart.quantity += 1;
 
-if (productInCart) {
-  console.log('Producto encontrado:', productInCart);
 } else {
-  console.log('Producto no encontrado.');
   const newProduct = {
     "product": pid,
     "quantity": 1
   };
   cart.products.push(newProduct);
 }
-    }
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+await cartManager.updateCarts(cart);
+res.status(200).json(cart);
     }
   }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-
-  //fijarse si en el arreglo del cart esta el producto
-  //si esta manejar el id
 });
 
 router.post('/carts', async (req, res) => {

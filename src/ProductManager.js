@@ -50,9 +50,9 @@ class ProductManager {
   async getProductById(id) {
     try {
       const products = await this.getFile(this.path);
-      const existingProduct = products.find((product) => product.id === id);
+      const existingProduct = products.find((product) => product.id == id);
     if (existingProduct) {
-      console.log(existingProduct);
+      return existingProduct;
     } else {
       throw new Error('Not found');
     }

@@ -58,5 +58,26 @@ class CartManager {
     }
   }
 
+  async updateCarts(updatedCart) {
+    try {
+      const carts = await this.getFile(this.path);
+  
+      const index = carts.findIndex((c) => c.id === updatedCart.id);
+  
+      if (index !== -1) {
+        carts[index] = updatedCart;
+  
+        await this.saveFile(this.path, JSON.stringify(carts));
+  
+        console.log(`Carrito actualizado correctamente con el ID ${updatedCart.id}`);
+      } else {
+        throw new Error("No se encontró el carrito.");
+      }
+    } catch (error) {
+      throw new Error("Error al actualizar el carrito.");
+    }
+  }
+  
+
 }
 module.exports = CartManager;
