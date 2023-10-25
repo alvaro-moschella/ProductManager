@@ -76,7 +76,7 @@ class ProductManager {
   async updateProduct(id, data) {
   const { title, description, code, price, status = true, stock, category, thumbnails } = data;
   const products = await this.getFile(this.path);
-  const productIndex = products.findIndex((p) => p.id === id);
+  const productIndex = products.findIndex((p) => p.id == id);
 
   if (productIndex === -1) {
     throw new Error('Producto no encontrado');
@@ -84,14 +84,19 @@ class ProductManager {
 
   const updatedProduct = products[productIndex];
 
+  if (code) {
+    const codeExists = products.map((product) => product.code).includes(code);
+    if (codeExists && products[productIndex].code !== code) {
+      throw new Error(`Ya existe un producto con el código ${code}.`);
+    }
+    updatedProduct.code = code;
+  }
+
   if (title) {
     updatedProduct.title = title;
   }
   if (description) {
     updatedProduct.description = description;
-  }
-  if (code) {
-    updatedProduct.code = code;
   }
   if (price) {
     updatedProduct.price = price;
