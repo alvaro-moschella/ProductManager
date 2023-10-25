@@ -33,7 +33,7 @@ class ProductManager {
       return newProduct;
 
     } catch (error) {
-      throw new Error('Ocurrió un error al agregar un producto: ', error.message);
+      throw new Error('Ocurrió un error al agregar un producto', error.message);
     }
 
   }
@@ -43,7 +43,7 @@ class ProductManager {
         const products = await this.getFile(this.path);
         return products;
       } catch (error) {
-        throw new Error('Ocurrió un error al obtener los productos: ', error.message);
+        throw new Error('Ocurrió un error al obtener los productos', error.message);
       }
   }
 
@@ -57,9 +57,8 @@ class ProductManager {
       throw new Error('Not found');
     }
     } catch (error) {
-      throw new Error('Ocurrió un error al obtener el producto: ', error.message);
+      throw new Error('Ocurrió un error al obtener el producto', error.message);
     }
-    
   }
 
   getFile = async (path) => {
@@ -129,7 +128,7 @@ async deleteProduct(id) {
     await this.saveFile(this.path, JSON.stringify(newProductsList));
     console.log(`Producto con id ${id} eliminado correctamente`);
   } catch (error) {
-    throw new Error('Ocurrió un error:', error.message);
+    throw new Error('Ocurrió un error', error.message);
   }
 }
 
