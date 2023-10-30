@@ -1,9 +1,14 @@
-const { Router } = require('express');
-const { v4 : uuidV4 } = require('uuid');
-const ProductManager = require('../ProductManager');
+import { Router } from 'express';
+import { v4 as uuidV4 } from 'uuid';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import ProductManager from '../ProductManager.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const router = Router();
-const productManager = new ProductManager(__dirname + '/../productos.json');
+const productManager = new ProductManager(path.join(__dirname, '../productos.json'));
 
 router.get('/products', async (req, res) => {
     try {
@@ -63,4 +68,4 @@ router.delete('/products/:pid', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

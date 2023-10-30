@@ -1,12 +1,17 @@
-const { Router } = require('express');
-const { v4 : uuidV4 } = require('uuid');
-const path = require('path');
-const CartManager = require('../CartManager');
-const ProductManager = require('../ProductManager');
+import { Router } from 'express';
+import { v4 as uuidV4 } from 'uuid';
+import path from 'path';
+import CartManager from '../CartManager.js';
+import ProductManager from '../ProductManager.js';
+import { fileURLToPath } from 'url';
 
 const router = Router();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const cartManager = new CartManager(path.join(__dirname, '../carrito.json'));
-const productManager = new ProductManager(__dirname + '/../productos.json');
+const productManager = new ProductManager(path.join(__dirname, '../productos.json'));
 
 router.get('/carts/:cid', async (req, res) => {
   const { cid } = req.params;
@@ -62,4 +67,4 @@ router.post('/carts', async (req, res) => {
   res.status(201).json(newCart);
 });
 
-module.exports = router;
+export default router;

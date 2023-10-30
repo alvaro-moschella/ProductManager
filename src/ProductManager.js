@@ -1,5 +1,5 @@
-const fs = require('fs');
-const { v4 : uuidV4 } = require('uuid');
+import fs from 'fs';
+import { v4 as uuidV4 } from 'uuid';
 
 class ProductManager {
 
@@ -138,7 +138,7 @@ async deleteProduct(id) {
 }
 
 }
-module.exports = ProductManager;
+export default ProductManager;
 
 async function test(run) {
 if (run) {

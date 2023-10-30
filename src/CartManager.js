@@ -1,5 +1,5 @@
-const fs = require('fs');
-const { v4 : uuidV4 } = require('uuid');
+import fs from 'fs';
+import { v4 as uuidV4 } from 'uuid';
 
 class CartManager {
 
@@ -80,4 +80,4 @@ class CartManager {
   
 
 }
-module.exports = CartManager;
+export default CartManager;
