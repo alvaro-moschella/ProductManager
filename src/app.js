@@ -8,7 +8,7 @@ const PORT = 8080;
 
 import productsRouter from './routers/products.router.js';
 import cartsRouter from './routers/carts.router.js';
-import homeRouter from './routers/home.router.js';
+import viewsRouter from './routers/views.router.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,7 +23,7 @@ app.set('view engine', 'handlebars');
 
 app.use('/api', productsRouter, cartsRouter);
 
-app.use('/', homeRouter);
+app.use('/', viewsRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running in http://localhost:${PORT} 🚀`);
