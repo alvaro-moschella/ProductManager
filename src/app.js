@@ -13,8 +13,8 @@ import viewsRouter from './routers/views.router.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.engine('handlebars', handlebars.engine());
@@ -25,6 +25,10 @@ app.use('/api', productsRouter, cartsRouter);
 
 app.use('/', viewsRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server running in http://localhost:${PORT} 🚀`);
+app.use((error, req, res, next) => {
+  const message = `Ha ocurrido un error no controlado: ${error.message}`;
+  console.error(message);
+  res.status(500).json({ message });
 });
+
+export default app;
