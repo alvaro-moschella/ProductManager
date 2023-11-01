@@ -14,7 +14,6 @@ class ProductManager {
         throw new Error(`Todos los campos son obligatorios a excepción de 'thumbnails'.`);
     }
 
-    try {
       const products = await this.getFile(this.path);
       const codeExists = products.map((product) => product.code).includes(code);
   
@@ -31,11 +30,6 @@ class ProductManager {
   
       console.log(`Producto agregado correctamente con el id ${newProduct.id}`);
       return newProduct;
-
-    } catch (error) {
-      throw new Error('Ocurrió un error al agregar un producto', error.message);
-    }
-
   }
 
   async getProducts() {
@@ -122,19 +116,15 @@ class ProductManager {
 }
 
 async deleteProduct(id) {
-  try {
-    const products = await this.getFile(this.path);
-    const newProductsList = products.filter((product) => product.id !== id);
+  const products = await this.getFile(this.path);
+  const newProductsList = products.filter((product) => product.id !== id);
 
-    if (newProductsList.length === products.length) {
-      throw new Error('Producto no encontrado');
-    }
-
-    await this.saveFile(this.path, JSON.stringify(newProductsList));
-    console.log(`Producto con id ${id} eliminado correctamente`);
-  } catch (error) {
-    throw new Error('Ocurrió un error', error.message);
+  if (newProductsList.length === products.length) {
+    throw new Error('Producto no encontrado');
   }
+
+  await this.saveFile(this.path, JSON.stringify(newProductsList));
+  console.log(`Producto con id ${id} eliminado correctamente`);
 }
 
 }

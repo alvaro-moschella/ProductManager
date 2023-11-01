@@ -1,5 +1,9 @@
 const socket = io();
 
+socket.on('client-connected', () => {
+  console.log('Cliente conectado');
+});
+
 socket.on('product-list', (products) => {
   console.log('productos: ', products);
   const productsDiv = document.getElementById('products-div');

@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
+import { __dirname } from './utils.js';
 import handlebars from 'express-handlebars';
-import { fileURLToPath } from 'url';
 
 const app = express();
 const PORT = 8080;
@@ -9,9 +9,6 @@ const PORT = 8080;
 import productsRouter from './routers/products.router.js';
 import cartsRouter from './routers/carts.router.js';
 import viewsRouter from './routers/views.router.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
