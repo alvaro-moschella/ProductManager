@@ -12,12 +12,7 @@ let io;
 export const init = (httpServer) => {
   io = new Server(httpServer);
   io.on('connection', async (socketClient) => {
-
-    try {
-      const products = await productManager.getProducts();
-      socketClient.emit('product-list', products);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
+    const products = await productManager.getProducts();
+    socketClient.emit('product-list', products);
   });
 };

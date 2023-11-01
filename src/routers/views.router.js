@@ -12,14 +12,16 @@ const productManager = new ProductManager(path.join(__dirname, '../productos.jso
 router.get('/', async (req, res) => {
   try {
     const products = await productManager.getProducts();
-    const { limit } = req.query;
+    res.render('home', { products });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
-    if (limit) {
-      const limitedProducts = products.slice(0, limit);
-      res.render('home', { limitedProducts });
-    } else {
-      res.render('home', { products });
-    }
+router.get('/realtimeproducts', async (req, res) => {
+  try {
+    const products = await productManager.getProducts();
+      res.render('realTimeProducts', { products });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
