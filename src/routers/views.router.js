@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import ProductManager from '../ProductManager.js';
+import { productListUpdated } from '../socket.js';
 import path from 'path';
 const router = Router();
 import { fileURLToPath } from 'url';
@@ -31,7 +32,8 @@ router.post('/', async (req, res) => {
   try {
   const newProduct = await productManager.addProduct(req.body)
   const products = await productManager.getProducts();
-  res.status(201).json(newProduct);
+  productListUpdated(products);
+  res.status(201).send(newProduct);
   } catch (error) {
     console.error(error);
   }
@@ -42,6 +44,7 @@ router.post('/', async (req, res) => {
     try {
       await productManager.deleteProduct(id);
       const products = await productManager.getProducts();
+      productListUpdated(products);
       res.status(204);
     }catch(error) {
       throw new Error('Ocurrió un error al eliminar un producto', error.message);

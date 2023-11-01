@@ -15,3 +15,7 @@ export const init = (httpServer) => {
     socketClient.emit('product-list', products);
   });
 };
+
+export const productListUpdated = (products) => {
+  io.emit('product-list', products);
+}
