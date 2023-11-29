@@ -3,28 +3,31 @@ import { v4 as uuidV4 } from 'uuid';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import ProductManager from '../ProductManager.js';
+import productModel from '../models/product.model.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const router = Router();
+
+const URL_BASE = 'http://localhost:8080';
+
 const productManager = new ProductManager(path.join(__dirname, '../productos.json'));
 
 router.get('/products', async (req, res) => {
-    try {
-      const products = await productManager.getProducts();
-      const { limit } = req.query;
-  
-      if (limit) {
-        const limitedProducts = products.slice(0, limit);
-        res.status(200).json(limitedProducts);
-      } else {
-        res.json(products);
-      }
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
+  const { limit = 10, page = 1, sort, query } = req.query;
+  const criteria = {};
+  const options = { limit, page };
+  if (sort && (sort.toLowerCase() === 'asc' || sort.toLowerCase() === 'desc')) {
+    options.sort = { price: sort };
+  }
+  if (query) {
+    criteria.category =  query;
+  }
+  const result = await productModel.paginate(criteria, options);
+  res.status(200).json(buildPaginatedResponse(result, sort, query));
+
+});
 
   router.get('/products/:pid', async (req, res) => {
     const { pid } = req.params;
@@ -67,5 +70,20 @@ router.delete('/products/:pid', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+const buildPaginatedResponse = (data, sort, query) => {
+  return {
+    status: 'success',
+    payload: data.docs,
+    totalPages: data.totalPages,
+    prevPage: data.prevPage,
+    nextPage: data.nextPage,
+    page: data.page,
+    hasPrevPage: data.hasPrevPage,
+    hasNextPage: data.hasNextPage,
+    prevLink: data.hasPrevPage ? `${URL_BASE}/api/products?limit=${data.limit}&page=${data.prevPage}${sort ? `&sort=${sort}` : ''}${query ? `&query=${query}` : ''}` : null,
+    nextLink: data.hasNextPage ? `${URL_BASE}/api/products?limit=${data.limit}&page=${data.nextPage}${sort ? `&sort=${sort}` : ''}${query ? `&query=${query}` : ''}` : null,
+  };
+};
 
 export default router;

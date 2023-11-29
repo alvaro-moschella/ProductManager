@@ -129,28 +129,3 @@ async deleteProduct(id) {
 
 }
 export default ProductManager;
-
-async function test(run) {
-if (run) {
-  const pm = new ProductManager('./Products.txt');
-  await pm.getProducts();
-  await pm.addProduct('producto prueba', 'Este es un producto prueba', 200, 'Sin imagen', 'abc123', 25);
-  //await pm.addProduct('producto prueba', 'Este es un producto prueba', 200, 'Sin imagen', 'abc1234', 25);
-  
-  await pm.getProducts();
-
-  //await pm.getProductById(1);// producto existente
-  //await pm.getProductById(999);// producto inexistente - error
-  
-  //await pm.updateProduct(1, { title: 'titulo actualizado', description: 'descripcion actualizada'});
-  await pm.getProducts();
-
-  //await pm.deleteProduct(3);// eliminar producto que no existe - error
-  //await pm.deleteProduct(1);// eliminar producto existente
-
-// dejé comentados los métodos que devuelven error en los tests para que se ejecute todo hasta el final.
-}
-
-}
-
-test(false);

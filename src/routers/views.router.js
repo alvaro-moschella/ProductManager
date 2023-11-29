@@ -12,6 +12,7 @@ const productManager = new ProductManager(path.join(__dirname, '../productos.jso
 
 router.get('/', async (req, res) => {
   try {
+    const { limit = 10, page = 1, sort, query } = req.query;
     const products = await productManager.getProducts();
     res.render('home', { products });
   } catch (error) {

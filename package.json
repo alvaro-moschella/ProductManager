@@ -1,7 +1,7 @@
 {
   "name": "product-manager",
-  "version": "0.0.5",
-  "description": "5ta entrega",
+  "version": "0.0.7",
+  "description": "2da pre-entrega",
   "main": "src/server.js",
   "type": "module",
   "scripts": {
@@ -25,12 +25,16 @@
     "url": "https://github.com/alvaro-moschella/ProductManager/issues"
   },
   "nodemonConfig": {
-    "ignore": ["src/productos.json"]
+    "ignore": [
+      "src/productos.json"
+    ]
   },
   "homepage": "https://github.com/alvaro-moschella/ProductManager#readme",
   "dependencies": {
     "express": "^4.18.2",
     "express-handlebars": "^7.1.2",
+    "mongoose": "^8.0.2",
+    "mongoose-paginate-v2": "^1.7.4",
     "socket.io": "^4.7.2",
     "uuid": "^9.0.1"
   }
