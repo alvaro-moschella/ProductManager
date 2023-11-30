@@ -28,4 +28,7 @@
             {{/each}}
         </tbody>
     </table>
+    <p>Página actual: {{data.page}}</p>
+    <a href="{{data.prevLink}}" role="button" {{#unless data.hasPrevPage}}disabled{{/unless}}>Anterior</a>
+    <a href="{{data.nextLink}}" role="button" {{#unless data.hasNextPage}}disabled{{/unless}}>Siguiente</a>
 </article>

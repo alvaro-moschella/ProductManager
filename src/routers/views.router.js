@@ -66,7 +66,8 @@ router.post('/', async (req, res) => {
       criteria.category =  query;
     }
     const result = await productModel.paginate(criteria, options);
-    const data = buildPaginatedResponse({ ...result, sort, query });
+    const baseUrl = 'http://localhost:8080';
+    const data = buildPaginatedResponse(result, sort, query , baseUrl);
     res.render('products', { title: 'Listado de Productos', data });
   });
 
