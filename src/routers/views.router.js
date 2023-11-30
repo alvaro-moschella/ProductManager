@@ -75,4 +75,10 @@ router.post('/', async (req, res) => {
     res.render('products', { title: 'Listado de Productos', data });
   });
 
+  router.delete('/api/carts/:cid/products/:pid', async (req, res) => {
+    const { cid, pid } = req.params;
+    await StudentsManager.deleteById(sid);
+    res.status(204).end();
+  });
+
 export default router;

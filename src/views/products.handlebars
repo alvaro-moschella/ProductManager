@@ -11,7 +11,7 @@
             <th>Stock</th>
             <th>Categoría</th>
             <th>Thumbnails</th>
-            <th>{{payload}}</th>
+            <th>Detalle</th>
         </tr>
         <tbody>
             {{#each data.payload}}
@@ -24,6 +24,9 @@
                 <td>{{this.stock}}</td>
                 <td>{{this.category}}</td>
                 <td>{{this.thumbnails}}</td>
+                <td>
+                   <button id="agregarAlCarrito" style="padding: 5px 15px; font-size: 12px;">Agregar al carrito</button>
+                </td>
             </tr>
             {{/each}}
         </tbody>
@@ -32,3 +35,13 @@
     <a href="{{data.prevLink}}" role="button" {{#unless data.hasPrevPage}}disabled{{/unless}}>Anterior</a>
     <a href="{{data.nextLink}}" role="button" {{#unless data.hasNextPage}}disabled{{/unless}}>Siguiente</a>
 </article>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const agregarAlCarritoBtn = document.getElementById('agregarAlCarrito');
+
+    agregarAlCarritoBtn.addEventListener('click', function() {
+      alert('Perdón, esa parte no está hecha.');
+    });
+  });
+</script>
