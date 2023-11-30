@@ -21,10 +21,9 @@ router.get('/products', async (req, res) => {
     options.sort = { price: sort };
   }
   if (query) {
-    if (!isNaN(query)) {
-      criteria.stock = parseInt(query);
+    if (query == 'true' || query == 'false') {
+      criteria.status = query;
     } else {
-    console.log('tres', query);
       criteria.category = query;
     }
   }
