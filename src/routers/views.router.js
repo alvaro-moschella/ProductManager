@@ -63,7 +63,12 @@ router.post('/', async (req, res) => {
       options.sort = { price: sort };
     }
     if (query) {
-      criteria.category =  query;
+      if (!isNaN(query)) {
+        criteria.stock = parseInt(query);
+      } else {
+      console.log('tres', query);
+        criteria.category = query;
+      }
     }
     const result = await productModel.paginate(criteria, options);
     const baseUrl = 'http://localhost:8080';
