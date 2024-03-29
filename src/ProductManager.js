@@ -138,22 +138,3 @@ class ProductManager {
 }
 
 export default ProductManager;
-
-//Pruebas
-//Las pruebas son de antes de implementar crypto.randomUUID(), los ids ya no coinciden.
-//const productManager = new ProductManager('./Productos.json');
-
-//productManager.getProducts();
-//productManager.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25);
-//productManager.updateProduct(1, 'titulo modificado', 'string', 23, null, 'abc1234');
-//productManager.getProductById(1);
-//productManager.deleteProduct(400);//id inexistente
-//productManager.deleteProduct(1);
-/*
-productManager.getProductById(20);//id inexistente
-
-productManager.addProduct("producto prueba con codigo repetido", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25);
-productManager.addProduct("otro producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc1234", 25);
-productManager.getProducts();
-productManager.getProductById(1);//id existente
-*/
