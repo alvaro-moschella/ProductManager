@@ -1,0 +1,17 @@
+{
+  "name": "ProductManager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ProductManager.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "start:dev": "node --watch src/app.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "Alvaro",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

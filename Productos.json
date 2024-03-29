@@ -1,0 +1,92 @@
+[
+	{
+		"id": "aa9e18f8-933a-4ec5-b575-7b4cf3f9471a",
+		"title": "producto prueba",
+		"description": "Este es un producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc123",
+		"stock": 25
+	},
+	{
+		"id": "2",
+		"title": "producto prueba",
+		"description": "Este es un 2do producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc1234",
+		"stock": 25
+	},
+	{
+		"id": "aa9e18f8-933a-4ec5-b575-7b4cf3f4441a",
+		"title": "producto prueba",
+		"description": "Este es un 3er producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc12",
+		"stock": 25
+	},
+	{
+		"id": "aa9e18f8-933a-4ec5-b575-7b4f33f9441a",
+		"title": "producto prueba",
+		"description": "Este es un 4to producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc1",
+		"stock": 25
+	},
+	{
+		"id": "aa9e18f8-933a-4ec5-b5c5-7b4cf3f9441a",
+		"title": "producto prueba",
+		"description": "Este es un 5to producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc15",
+		"stock": 25
+	},
+	{
+		"id": "aa9e18f8-933a-4ec5-b575-7b4df3f4441a",
+		"title": "producto prueba",
+		"description": "Este es un 6to producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc16",
+		"stock": 25
+	},
+	{
+		"id": "aa9e18f8-933a-4ec5-b575-7a4cf3f9441a",
+		"title": "producto prueba",
+		"description": "Este es un 7mo producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc17",
+		"stock": 25
+	},
+	{
+		"id": "aa9e18f8-933a-4eb5-b575-7b4cf3f4441a",
+		"title": "producto prueba",
+		"description": "Este es un 8vo producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc18",
+		"stock": 25
+	},
+	{
+		"id": "aa9e18f8-933a-4ac5-b575-7b4cf3f9441a",
+		"title": "producto prueba",
+		"description": "Este es un 9no producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc19",
+		"stock": 25
+	},
+	{
+		"id": "aa9e18f8-933a-4ec5-b575-7b4cf3f1141a",
+		"title": "producto prueba",
+		"description": "Este es un 10mo producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc10",
+		"stock": 25
+	}
+]
