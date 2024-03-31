@@ -102,9 +102,6 @@ class ProductManager {
           if (thumbnail) {
               updatedProduct.thumbnail = thumbnail;
           }
-          if (code) {
-            updatedProduct.code = code;
-          }
           if (stock) {
             updatedProduct.stock = stock;
           }
