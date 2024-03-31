@@ -71,7 +71,7 @@ class ProductManager {
         return fs.promises.writeFile(path, data, 'utf-8');
       }
 
-      async updateProduct(id, title, description, price, thumbnail, code, stock) {
+      async updateProduct(id, body) {
         try {
           const products = await this.readFile(this.path);
           const productIndex = products.findIndex(p => p.id == id);
@@ -79,8 +79,9 @@ class ProductManager {
           if (productIndex === -1) {
             throw new Error('Producto no encontrado');
           }
-        
+          
           const updatedProduct = products[productIndex];
+          const { code } = body;
         
           if (code) {
             const codeExists = products.map((product) => product.code).includes(code);
@@ -89,23 +90,12 @@ class ProductManager {
             }
             updatedProduct.code = code;
           }
-        
-          if (title) {
-            updatedProduct.title = title;
-          }
-          if (description) {
-            updatedProduct.description = description;
-          }
-          if (price) {
-            updatedProduct.price = price;
-          }
-          if (thumbnail) {
-              updatedProduct.thumbnail = thumbnail;
-          }
-          if (stock) {
-            updatedProduct.stock = stock;
-          }
-          
+
+          Object.keys(body).forEach(field => {
+            if (body[field] !== undefined) {
+                updatedProduct[field] = body[field];
+            }
+          });
           products[productIndex] = updatedProduct;
         
           await this.saveFile(this.path, JSON.stringify(products, null, '\t'));
