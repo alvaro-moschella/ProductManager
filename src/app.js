@@ -14,17 +14,6 @@ app.get('/', (req, res)=>{
 
 app.use('/api/products', productsRouter)
 
-app.get('/products/:pid', async (req, res) => {
-    const { pid } = req.params;
-    try {
-        const product = await productManager.getProductById(pid)
-        res.status(200).send(product)
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-});
-
-
 app.listen(8080, error => {
     console.log('Escuchando el puerto 8080')
 })
