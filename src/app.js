@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.get('/', (req, res)=>{
-    res.status(200).send('<h1>Product Manager</h1>')
+    res.status(200).send('<h1>Product Manager Home</h1>')
 })
 
 app.use('/api/products', productsRouter)

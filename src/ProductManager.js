@@ -7,37 +7,32 @@ class ProductManager {
         this.path = path;
     }
 
-    async addProduct(title, description, price, thumbnail, code, stock) {
-        if (!title, !description, !price, !thumbnail, !code, !stock) {
-            throw new Error('Todos los campos son obligatorios.');
-        }
+    async addProduct(body) {
+      const { title, description, code, price, status = true, stock, category, thumbnails } = body
+      if (!title || !description || !code || !price || !status || !stock || !category) {
+          throw new Error(`Todos los campos son obligatorios a excepción de 'thumbnails'.`)
+      }
 
         try {
           const products = await this.readFile(this.path);
-          const codeExists = products.map((product) => product.code).includes(code);
+          const codeExists = products.map((product) => product.code).includes(code)
   
         if (codeExists) {
-            throw new Error(`Ya existe un producto con el código ${code}.`);
+            throw new Error(`Ya existe un producto con el código ${code}.`)
         }
 
         const newProduct = {
             id: crypto.randomUUID(),
-            title: title,
-            description: description,
-            price: price,
-            thumbnail: thumbnail,
-            code: code,
-            stock: stock
-        };
+            ...body
+        }
 
-        products.push(newProduct);
-        await this.saveFile(this.path, JSON.stringify(products, null, '\t'));
+        products.push(newProduct)
+        await this.saveFile(this.path, JSON.stringify(products, null, '\t'))
 
-        console.log(`Producto agregado correctamente con el id ${newProduct.id}`);
-        return;
+        console.log(`Producto agregado correctamente con el id ${newProduct.id}`)
+        return newProduct
         } catch (error) {
-          console.error(error.message);
-          return;
+          throw new Error(`Ocurrió un error: ${error.message}`)
         }
     }
 

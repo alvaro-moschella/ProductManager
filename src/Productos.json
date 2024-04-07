@@ -88,5 +88,19 @@
 		"thumbnail": "Sin imagen",
 		"code": "abc10",
 		"stock": 25
+	},
+	{
+		"id": "ac68313c-854f-4996-9b67-bc70f2f73264",
+		"title": "Producto route",
+		"description": "Producto agregado desde el router",
+		"code": "router0",
+		"price": 200,
+		"status": true,
+		"stock": 25,
+		"category": "Productos Router",
+		"thumbnails": [
+			"src/public/producto_router0_1.jpg",
+			"src/public/producto_router0_2.jpg"
+		]
 	}
 ]
