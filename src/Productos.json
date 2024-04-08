@@ -10,7 +10,7 @@
 	},
 	{
 		"id": "2",
-		"title": "producto prueba",
+		"title": "Producto modificado",
 		"description": "Este es un 2do producto prueba",
 		"price": 200,
 		"thumbnail": "Sin imagen",
@@ -101,6 +101,20 @@
 		"thumbnails": [
 			"src/public/producto_router0_1.jpg",
 			"src/public/producto_router0_2.jpg"
+		]
+	},
+	{
+		"id": "b5f733fc-dc4d-41c2-8272-3277d0453e5e",
+		"title": "Producto route",
+		"description": "Producto agregado desde el router",
+		"code": "router1",
+		"price": 200,
+		"status": true,
+		"stock": 25,
+		"category": "Productos Router",
+		"thumbnails": [
+			"src/public/producto_router1_1.jpg",
+			"src/public/producto_router1_2.jpg"
 		]
 	}
 ]

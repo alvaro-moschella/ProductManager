@@ -58,6 +58,7 @@ class ProductManager {
             const content = await fs.promises.readFile(this.path, 'utf-8');
             return JSON.parse(content);
         } catch (error) {
+            console.error('Error al leer el archivo:', error);
             return [];
         }
       };
@@ -95,10 +96,9 @@ class ProductManager {
         
           await this.saveFile(this.path, JSON.stringify(products, null, '\t'));
           console.log('Producto actualizado correctamente');
-          return;
+          return updatedProduct;
         } catch (error) {
-          console.error(error.message);
-          return;
+          throw error
         }
       }
 
