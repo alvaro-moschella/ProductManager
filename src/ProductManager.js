@@ -113,8 +113,7 @@ class ProductManager {
           await this.saveFile(this.path, JSON.stringify(newProductsList, null, '\t'));
           console.log(`Producto con id ${id} eliminado correctamente`);
         } catch (error) {
-            console.error(error.message);
-            return;
+            throw error
         }
       }
 }

@@ -18,15 +18,6 @@
 		"stock": 25
 	},
 	{
-		"id": "aa9e18f8-933a-4ec5-b575-7b4cf3f4441a",
-		"title": "producto prueba",
-		"description": "Este es un 3er producto prueba",
-		"price": 200,
-		"thumbnail": "Sin imagen",
-		"code": "abc12",
-		"stock": 25
-	},
-	{
 		"id": "aa9e18f8-933a-4ec5-b575-7b4f33f9441a",
 		"title": "producto prueba",
 		"description": "Este es un 4to producto prueba",

@@ -46,4 +46,14 @@ router.put('/:pid', async (req, res) => {
     }
 });
 
+router.delete('/:pid', async (req, res) => {
+    const { pid } = req.params;
+    try {
+      const deletedProduct = await productManager.deleteProduct(pid);
+      res.status(204).json(deletedProduct);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
 export default router
