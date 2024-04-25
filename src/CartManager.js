@@ -26,13 +26,15 @@ class CartManager {
     }
   }
 
-  readFile = async (path) => {
-    if (!fs.existsSync(path)) {
-      return []
-    }
-    const content = await fs.promises.readFile(path, 'utf-8')
-    return JSON.parse(content)
-  }
+  readFile = async () => {
+        try {
+            const content = await fs.promises.readFile(this.path, 'utf-8')
+            return JSON.parse(content)
+        } catch (error) {
+            console.error('Error al leer el archivo:', error)
+            return []
+        }
+      }
   
   saveFile = (path, data) => {
     return fs.promises.writeFile(path, data, 'utf-8')
