@@ -20,7 +20,6 @@ router.get('/', async (req, res) => {
 router.get('/realtimeproducts', async (req, res) => {
   try {
     const products = await productManager.getProducts();
-    console.log('productos',products)
     res.render('realTimeProducts', { products });
   } catch (error) {
     res.status(500).send({ error: error.message });
@@ -43,8 +42,8 @@ router.post('/', async (req, res) => {
     try {
       await productManager.deleteProduct(id);
       const products = await productManager.getProducts();
-      productListUpdated(products);
-      res.status(204);
+      productListUpdated(products)
+      res.status(204).send()
     }catch(error) {
       throw new Error('Ocurrió un error al eliminar un producto', error.message);
     } 
