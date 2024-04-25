@@ -8,7 +8,7 @@ let io;
 export const init = (httpServer) => {
   io = new Server(httpServer);
   io.on('connection', async (socketClient) => {
-    const productManager = new ProductManager(__dirname,'/productos.json');
+    const productManager = new ProductManager('productos.json');
     const products = await productManager.getProducts();
     socketClient.emit('client-connected');
     socketClient.emit('product-list', products);

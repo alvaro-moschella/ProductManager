@@ -4,7 +4,7 @@ import { productListUpdated } from '../socket.js'
 const router = Router()
 import { __dirname } from '../utils.js'
 
-const productManager = new ProductManager(__dirname+'/productos.json')
+const productManager = new ProductManager('productos.json')
 
 router.get('/', async (req, res) => {
     const { limit } = req.query;
@@ -20,6 +20,7 @@ router.get('/', async (req, res) => {
 router.get('/realtimeproducts', async (req, res) => {
   try {
     const products = await productManager.getProducts();
+    console.log('productos',products)
     res.render('realTimeProducts', { products });
   } catch (error) {
     res.status(500).send({ error: error.message });

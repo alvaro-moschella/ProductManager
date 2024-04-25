@@ -2,7 +2,7 @@ import express from 'express'
 import handlebars from 'express-handlebars';
 import { __dirname } from './utils.js'
 import ProductManager from './ProductManager.js'
-const productManager = new ProductManager('Productos.json');
+const productManager = new ProductManager('productos.json');
 
 import productsRouter from './routes/products.router.js'
 import cartsRouter from './routes/carts.router.js'
