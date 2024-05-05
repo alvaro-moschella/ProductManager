@@ -30,6 +30,7 @@ router.post('/', async (req, res) => {
     try {
         const { body } = req
         const newProduct = await productManager.addProduct(body)
+        const products = await productManager.getProducts()
         productListUpdated(products)
         res.status(201).send(newProduct)
     } catch (error) {
