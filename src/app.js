@@ -11,9 +11,11 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static(__dirname+'/public'))
 
-app.engine('handlebars', handlebars.engine())
+app.engine('hbs', handlebars.engine({
+    extname: '.hbs'
+}))
 app.set('views', __dirname+'/views')
-app.set('view engine', 'handlebars')
+app.set('view engine', 'hbs')
 
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
