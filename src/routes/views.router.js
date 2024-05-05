@@ -19,35 +19,11 @@ router.get('/', async (req, res) => {
 
 router.get('/realtimeproducts', async (req, res) => {
   try {
-    const products = await productManager.getProducts();
-    res.render('realTimeProducts', { products });
+    const products = await productManager.getProducts()
+    res.render('realTimeProducts', { products })
   } catch (error) {
-    res.status(500).send({ error: error.message });
+    res.status(500).send({ error: error.message })
   }
-});
+})
 
-router.post('/', async (req, res) => {
-  try {
-  const newProduct = await productManager.addProduct(req.body)
-  const products = await productManager.getProducts();
-  productListUpdated(products);
-  res.status(201).send(newProduct);
-  } catch (error) {
-    console.error(error);
-  }
-  });
-
-  router.delete('/:id', async (req, res) => {
-    const { id } = req.params;
-    try {
-      await productManager.deleteProduct(id);
-      const products = await productManager.getProducts();
-      productListUpdated(products)
-      res.status(204).send()
-    }catch(error) {
-      throw new Error('Ocurrió un error al eliminar un producto', error.message);
-    } 
-  }
-  );
-
-export default router;
+export default router
