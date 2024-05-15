@@ -1,21 +1,23 @@
 import { Router } from 'express'
-import ProductManager from '../ProductManager.js'
-import CartManager from '../CartManager.js'
+import CartManagerMongo from '../dao/cartsManagerMongo.js'
 const router = Router()
+const cartService = new CartManagerMongo()
 
-const cartManager = new CartManager('carrito.json')
-const productManager = new ProductManager('productos.json')
-
+router.get('/', async (req, res) => {
+  const carts = await cartService.getCarts()
+  res.send(carts)
+})
 
 router.post('/', async (req, res) => {
-    const newCart = await cartManager.addCart()
+    const newCart = await cartService.createCart()
     res.status(201).send(newCart)
   })
 
 router.get('/:cid', async (req, res) => {
   const { cid } = req.params
   try {
-    const cart = await cartManager.getCartById(cid)
+    const cart = await cartService.getCartBy({_id: cid})
+    console.log('carrito', cart)
     if (!cart) {
         res.status(404).send({ error: "El carrito no existe" })
     } else {
@@ -29,36 +31,8 @@ router.get('/:cid', async (req, res) => {
 
 router.post('/:cid/product/:pid', async (req, res) => {
   const { cid, pid } = req.params
-
-  try {
-    const cart = await cartManager.getCartById(cid)
-  if (!cart) {
-    res.status(404).send({ error: "El carrito no existe" })
-  } else {
-    const product = await productManager.getProductById(pid)
-    if (!product) {
-      res.status(404).send({ error: "El producto no existe" })
-    } else {
-
-      const productIsInCart = cart.products.find(item => item.product === pid)
-
-      if (productIsInCart) {
-        productIsInCart.quantity += 1
-
-} else {
-  const newProduct = {
-    "product": pid,
-    "quantity": 1
-  }
-  cart.products.push(newProduct)
-}
-await cartManager.updateCarts(cart)
-res.status(200).send(cart)
-    }
-  }
-  } catch (error) {
-    res.status(500).send({ error: error.message })
-  }
+  const updatedCart = await cartService.updateCart(cid, pid)
+  res.status(200).send(updatedCart)
 })
 
 export default router

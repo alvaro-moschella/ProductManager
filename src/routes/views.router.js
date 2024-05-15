@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import ProductManager from '../ProductManager.js'
+import ProductManager from '../dao/ProductManagerFS.js'
 import { productListUpdated } from '../socket.js'
 const router = Router()
 import { __dirname } from '../utils.js'

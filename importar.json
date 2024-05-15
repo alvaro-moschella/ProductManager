@@ -1,0 +1,185 @@
+[
+	{
+		"title": "producto prueba",
+		"description": "Este es un producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc123",
+		"stock": 25
+	},
+	{
+		"title": "Producto modificado",
+		"description": "Este es un 2do producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc1234",
+		"stock": 25
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un 4to producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc1",
+		"stock": 25
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un 5to producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc15",
+		"stock": 25
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un 6to producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc16",
+		"stock": 25
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un 7mo producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc17",
+		"stock": 25
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un 8vo producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc18",
+		"stock": 25
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un 9no producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc19",
+		"stock": 25
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un 10mo producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "abc10",
+		"stock": 25
+	},
+	{
+		"title": "Producto route",
+		"description": "Producto agregado desde el router",
+		"code": "router0",
+		"price": 200,
+		"status": true,
+		"stock": 25,
+		"category": "Productos Router",
+		"thumbnails": [
+			"src/public/producto_router0_1.jpg",
+			"src/public/producto_router0_2.jpg"
+		]
+	},
+	{
+		"title": "Producto route",
+		"description": "Producto agregado desde el router",
+		"code": "router1",
+		"price": 200,
+		"status": true,
+		"stock": 25,
+		"category": "Productos Router",
+		"thumbnails": [
+			"src/public/producto_router1_1.jpg",
+			"src/public/producto_router1_2.jpg"
+		]
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "sdf",
+		"stock": 25
+	},
+	{
+		"title": "Producto modificado",
+		"description": "Este es un 2do producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "qwe4",
+		"stock": 25
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un 4to producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "qwe4",
+		"stock": 25
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un 5to producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "qwe2",
+		"stock": 25
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un 6to producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "qwe1",
+		"stock": 25
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un 7mo producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "qwe",
+		"stock": 25
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un 8vo producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "asd4",
+		"stock": 25
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un 9no producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "asd3",
+		"stock": 25
+	},
+	{
+		"title": "producto prueba",
+		"description": "Este es un 10mo producto prueba",
+		"price": 200,
+		"thumbnail": "Sin imagen",
+		"code": "asd2",
+		"stock": 25
+	},
+	{
+		"title": "Producto route",
+		"description": "Producto agregado desde el router",
+		"code": "asd1",
+		"price": 200,
+		"status": true,
+		"stock": 25,
+		"category": "Productos Router",
+		"thumbnails": [
+			"src/public/producto_router0_1.jpg",
+			"src/public/producto_router0_2.jpg"
+		]
+	}
+]
