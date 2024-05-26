@@ -48,8 +48,7 @@ sessionsRouter.post('/login', async (req, res) => {
         email,
         admin: userFound.role === 'admin'
     }
-
-    res.send('login success')
+    res.redirect('/products')
 })
 
 sessionsRouter.get('/current', auth, (req, res) => {
