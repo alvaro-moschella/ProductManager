@@ -5,11 +5,28 @@ import { __dirname } from './utils.js'
 import productsRouter from './routes/products.router.js'
 import cartsRouter from './routes/carts.router.js'
 import viewsRouter from './routes/views.router.js'
+import { sessionsRouter } from './routes/sessions.router.js'
+import session from 'express-session'
+import MongoStore from 'connect-mongo'
 
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static(__dirname+'/public'))
+
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl: 'mongodb+srv://admin:tNYclI4wo1nqG1Ge@cluster0.akju9kh.mongodb.net/ecommerce',
+        mongoOption: {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        },
+        ttl: 3600*1000*24
+    }),
+    secret: 's3cr3etC@d3r',
+    resave: true,
+    saveUninitialized: true
+}))
 
 app.engine('hbs', handlebars.engine({
     extname: '.hbs'
@@ -19,6 +36,7 @@ app.set('view engine', 'hbs')
 
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
+app.use('/api/sessions', sessionsRouter)
 
 app.use('/', viewsRouter);
 

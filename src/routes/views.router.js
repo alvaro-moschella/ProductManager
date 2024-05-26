@@ -9,6 +9,14 @@ import CartManagerMongo from '../dao/cartsManagerMongo.js'
 const cartService = new CartManagerMongo()
 const productManager = new ProductManager('productos.json')
 
+router.get('/login', (req, res) => {
+  res.render('login')
+})
+
+router.get('/register', (req, res) => {
+  res.render('register')
+})
+
 router.get('/', async (req, res) => {
     const { limit } = req.query;
     try {
