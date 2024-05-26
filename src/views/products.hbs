@@ -38,6 +38,17 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    const userEmail = "{{userEmail}}";
+    
+    if (userEmail) {
+      Swal.fire({
+        title: 'Bienvenido',
+        text: `Bienvenido ${userEmail}!`,
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+    }
+    
     const BtnAgregarAlCarrito = document.querySelectorAll('.agregarAlCarritoBtn');
 
     BtnAgregarAlCarrito.forEach(btn => {

@@ -59,7 +59,13 @@ router.get('/products', async (req, res) => {
     try {
         const result = await productService.getProducts(criteria, options)
         const products = buildPaginatedResponse(result, sort, query)
-        res.render('products', products)
+        if(req.session?.user?.first_time){
+          const userEmail = req.session.user ? req.session?.user?.email : null
+          req.session.user.first_time = false
+          res.render('products', { ...products, userEmail })
+      }else{
+          res.render('products', products)
+      }
     } catch (error) {
         res.status(500).send({ status: 'error', error: error.message })
     }

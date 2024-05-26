@@ -46,7 +46,8 @@ sessionsRouter.post('/login', async (req, res) => {
 
     req.session.user = {
         email,
-        admin: userFound.role === 'admin'
+        admin: userFound.role === 'admin',
+        first_time: true
     }
     res.redirect('/products')
 })
