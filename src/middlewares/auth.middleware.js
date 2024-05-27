@@ -1,5 +1,5 @@
 export function auth(req, res, next) {
-    if(req.session?.user?.email === 'alvaro.m@gmail.com' && req.session?.user?.admin) {
+    if(req.session?.user) {
         return next()
     }
 

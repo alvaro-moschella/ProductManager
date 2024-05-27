@@ -5,27 +5,17 @@ const router = Router()
 import { __dirname, buildPaginatedResponse } from '../utils.js'
 import ProductsManagerMongo from '../dao/productsManagerMongo.js'
 import CartManagerMongo from '../dao/cartsManagerMongo.js'
+import { auth } from '../middlewares/auth.middleware.js'
 
 const cartService = new CartManagerMongo()
 const productManager = new ProductManager('productos.json')
 
-router.get('/login', (req, res) => {
+router.get('/', (req, res) => {
   res.render('login')
 })
 
 router.get('/register', (req, res) => {
   res.render('register')
-})
-
-router.get('/', async (req, res) => {
-    const { limit } = req.query;
-    try {
-        const products = await productManager.getProducts()
-        const productList = limit ? products.slice(0, limit) : products
-        res.render('home', { productList })
-    } catch (error) {
-        res.status(500).send({ error: error.message })
-    }
 })
 
 router.get('/realtimeproducts', async (req, res) => {
@@ -42,7 +32,7 @@ router.get('/chat', (req, res) => {
 })
 
 const productService = new ProductsManagerMongo()
-router.get('/products', async (req, res) => {
+router.get('/products', auth, async (req, res) => {
   const { limit = 10, page = 1, sort, query } = req.query
   const criteria = {}
   const options = { limit, page }
