@@ -1,8 +1,14 @@
+{{#if sessionUser}}
 <main>
-    <a href="/api/sessions/logout" class="btn btn-outline-danger w-25">Logout</a>
+    <a href="/api/sessions/logout">Logout</a>
 </main>
-{{#if sessionUser}}Bienvenido, {{sessionUser.email}}. Rol: {{#if sessionUser.admin}}admin{{else}}user{{/if}}{{/if}}
-<h1>Lista de Productos</h1>
+Bienvenido, {{sessionUser.email}}. Rol: {{#if sessionUser.admin}}admin{{else}}user{{/if}}
+{{else}}
+<main>
+    <a href="/">Iniciar sesión</a>
+</main>
+{{/if}}
+<h1>Listado de Productos</h1>
 <article>
     <table>
         <tr>

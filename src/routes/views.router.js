@@ -4,7 +4,6 @@ const router = Router()
 import { __dirname, buildPaginatedResponse } from '../utils.js'
 import ProductsManagerMongo from '../dao/productsManagerMongo.js'
 import CartManagerMongo from '../dao/cartsManagerMongo.js'
-import { auth } from '../middlewares/auth.middleware.js'
 
 const cartService = new CartManagerMongo()
 
@@ -30,7 +29,7 @@ router.get('/chat', (req, res) => {
 })
 
 const productService = new ProductsManagerMongo()
-router.get('/products', auth, async (req, res) => {
+router.get('/products', async (req, res) => {
   const { limit = 10, page = 1, sort, query } = req.query
   const criteria = {}
   const options = { limit, page }
@@ -48,7 +47,7 @@ router.get('/products', auth, async (req, res) => {
         const result = await productService.getProducts(criteria, options)
         const products = buildPaginatedResponse(result, sort, query)
         const userFullName = req.session.user ? `${req.session.user.first_name || ''} ${req.session.user.last_name || ''}`.trim() : null
-        const sessionUser = req.session.user
+        const sessionUser = req.session.user ?? null
         if(req.session?.user?.first_time){
           req.session.user.first_time = false
           res.render('products', { ...products, userFullName, sessionUser, showPopUp: true })
