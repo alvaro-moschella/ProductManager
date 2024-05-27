@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import ProductManager from '../dao/ProductManagerFS.js'
 import { productListUpdated } from '../socket.js'
 const router = Router()
 import { __dirname, buildPaginatedResponse } from '../utils.js'
@@ -8,7 +7,6 @@ import CartManagerMongo from '../dao/cartsManagerMongo.js'
 import { auth } from '../middlewares/auth.middleware.js'
 
 const cartService = new CartManagerMongo()
-const productManager = new ProductManager('productos.json')
 
 router.get('/', (req, res) => {
   res.render('login')
@@ -20,7 +18,7 @@ router.get('/register', (req, res) => {
 
 router.get('/realtimeproducts', async (req, res) => {
   try {
-    const products = await productManager.getProducts()
+    const products = await productService.getProducts()
     res.render('realTimeProducts', { products })
   } catch (error) {
     res.status(500).send({ error: error.message })
