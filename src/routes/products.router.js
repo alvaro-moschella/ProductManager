@@ -9,28 +9,6 @@ const productManager = new ProductManager('productos.json')
 const router = Router()
 
 const productService = new ProductsManagerMongo()
-router.get('/', async (req, res) => {
-  const { limit = 10, page = 1, sort, query } = req.query
-  const criteria = {}
-  const options = { limit, page }
-  if (sort && (sort.toLowerCase() === 'asc' || sort.toLowerCase() === 'desc')) {
-    options.sort = { price: sort }
-  }
-  if (query) {
-    if (query.toLowerCase() === 'true' || query.toLowerCase() == 'false') {
-      criteria.status = query
-    } else {
-      criteria.category = query
-    }
-  }
-    try {
-        const result = await productService.getProducts(criteria, options)
-        const products = buildPaginatedResponse(result, sort, query)
-        res.render('products', products)
-    } catch (error) {
-        res.status(500).send({ status: 'error', error: error.message })
-    }
-})
 
 router.get('/:pid', async (req, res) => {
     const { pid } = req.params
@@ -41,6 +19,7 @@ router.get('/:pid', async (req, res) => {
       res.status(500).json('Error al buscar el producto')
     }
 })
+
 router.post('/', async (req, res) => {
     const { body } = req
     const result = await productsModel.create(body)
