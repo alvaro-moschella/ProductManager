@@ -42,8 +42,8 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const userFullName = "{{userFullName}}";
-    
-    if (userFullName) {
+    const showPopUp = {{showPopUp}};
+    if (userFullName && showPopUp) {
       Swal.fire({
         title: 'Bienvenido',
         text: `¡Bienvenido, ${userFullName}!`,
