@@ -46,6 +46,8 @@ sessionsRouter.post('/login', async (req, res) => {
 
     req.session.user = {
         email,
+        first_name: userFound.first_name ?? null,
+        last_name: userFound.last_name ?? null,
         admin: userFound.role === 'admin',
         first_time: true
     }
@@ -60,7 +62,7 @@ sessionsRouter.get('/current', auth, (req, res) => {
 sessionsRouter.get('/logout', (req, res) => {
     req.session.destroy( err => {
         if(err) return res.send({status: 'error', error: err})
-        else return res.send('logout')
+        else return res.redirect('/')
     })
 })
 

@@ -1,5 +1,8 @@
+<main>
+    <a href="/api/sessions/logout" class="btn btn-outline-danger w-25">Logout</a>
+</main>
+{{#if sessionUser}}Bienvenido, {{sessionUser.email}}. Rol: {{#if sessionUser.admin}}admin{{else}}user{{/if}}{{/if}}
 <h1>Lista de Productos</h1>
-
 <article>
     <table>
         <tr>
@@ -38,12 +41,12 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const userEmail = "{{userEmail}}";
+    const userFullName = "{{userFullName}}";
     
-    if (userEmail) {
+    if (userFullName) {
       Swal.fire({
         title: 'Bienvenido',
-        text: `Bienvenido ${userEmail}!`,
+        text: `¡Bienvenido, ${userFullName}!`,
         icon: 'success',
         confirmButtonText: 'OK'
       });

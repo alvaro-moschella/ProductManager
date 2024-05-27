@@ -50,9 +50,10 @@ router.get('/products', auth, async (req, res) => {
         const result = await productService.getProducts(criteria, options)
         const products = buildPaginatedResponse(result, sort, query)
         if(req.session?.user?.first_time){
-          const userEmail = req.session.user ? req.session?.user?.email : null
+          const userFullName = req.session.user ? `${req.session.user.first_name || ''} ${req.session.user.last_name || ''}`.trim() : null
+          const sessionUser = req.session.user
           req.session.user.first_time = false
-          res.render('products', { ...products, userEmail })
+          res.render('products', { ...products, userFullName, sessionUser })
       }else{
           res.render('products', products)
       }
