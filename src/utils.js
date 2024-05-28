@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 const __filename = fileURLToPath(import.meta.url)
 export const __dirname = dirname(__filename)
 
-export const URL_BASE = 'http://localhost:8080/api'
+export const URL_BASE = 'http://localhost:8080'
 
 export const buildPaginatedResponse = (data, sort = null, query = null, baseUrl = URL_BASE) => {
     return {

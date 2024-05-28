@@ -1,58 +1,45 @@
 import {Router} from 'express'
-import { UsersManagerMongo } from '../dao/usersManagerMongo.js'
 import { auth } from '../middlewares/auth.middleware.js'
-import { createHash } from '../utils.js'
-import { isValidPassword } from '../utils.js'
+import passport from 'passport'
 
 export const sessionsRouter = Router()
 
-const userService = new UsersManagerMongo()
-sessionsRouter.post('/register', async (req, res) => {
-    try {
-        const {first_name, last_name, email, password} = req.body
+sessionsRouter.get('/github', passport.authenticate('github', {scope: 'user:email'}), async (req, res)=>{})
 
-        if(!email || !password) return res.status(401).send({status: 'error', error: 'se deben completar todos los datos'})
-
-        const userExists = await userService.getUserBy({email})
-        if (userExists) return res.status(401).send({status: 'error', error: 'el usuario ya existe'})
-
-            const newUser = {
-                first_name,
-                last_name,
-                email,
-                password: createHash(password)
-            }
-
-        const result = await userService.createUser(newUser)
-        console.log(result)
-
-        res.send('usuario registrado')
-    } catch (error) {
-        console.log(error)
-    }
-    
-})
-
-sessionsRouter.post('/login', async (req, res) => {
-    const {email, password} = req.body
-
-    if(!email || !password) return res.status(401).send({status: 'error', error: 'se deben completar todos los datos'})
-
-    const userFound = await userService.getUserBy({email})
-
-    if(!userFound) return res.status(400).send({status: 'error', error: 'usuario no encontrado'})
-
-    if(!isValidPassword(password, {password: userFound.password})) return res.status(401).send({status: 'error', error: 'Password incorrecto'})
-
+sessionsRouter.get('/githubcallback', passport.authenticate('github', {failureRedirect: '/login'}), (req, res) => {
     req.session.user = {
-        email,
-        first_name: userFound.first_name ?? null,
-        last_name: userFound.last_name ?? null,
-        admin: userFound.role === 'admin',
+        email: req.user.email,
+        first_name: req.user.first_name ?? null,
+        last_name: null,
+        admin: req.user.role === 'admin',
         first_time: true
     }
     res.redirect('/products')
 })
+
+ sessionsRouter.post('/register', passport.authenticate('register', {failureRedirect: '/failregister'}), async (req, res) => {
+     res.render('userRegistered')
+ })
+ sessionsRouter.post('/failregister', async (req, res) => {
+     console.log('falló la estrategia')
+     res.send({error: 'failed'})
+ })
+
+  sessionsRouter.post('/login', passport.authenticate('login', {failureRedirect: '/faillogin'}),async (req, res) => {
+     if(!req.user) return res.status(400).send({status: 'error', error: 'credenciales invalidas'})
+        req.session.user = {
+            email: req.user.email,
+            first_name: req.user.first_name ?? null,
+            last_name: req.user.last_name ?? null,
+            admin: req.user.role === 'admin',
+            first_time: true
+        }
+        res.redirect('/products')
+ })
+
+ sessionsRouter.post('/faillogin', (req, res) => {
+     res.send({error: 'falló el login'})
+ })
 
 sessionsRouter.get('/current', auth, (req, res) => {
     res.send('datos sensibles')

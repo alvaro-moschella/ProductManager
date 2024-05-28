@@ -8,6 +8,8 @@ import viewsRouter from './routes/views.router.js'
 import { sessionsRouter } from './routes/sessions.router.js'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
+import passport from 'passport'
+import { initPassport } from './config/passport.config.js'
 
 const app = express()
 app.use(express.json())
@@ -27,6 +29,10 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
+
+initPassport()
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.engine('hbs', handlebars.engine({
     extname: '.hbs'
