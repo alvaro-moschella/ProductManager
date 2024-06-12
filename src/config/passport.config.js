@@ -1,11 +1,13 @@
 import passport from "passport"
 import local from "passport-local"
 import { UsersManagerMongo } from "../dao/usersManagerMongo.js"
+import CartManagerMongo from "../dao/cartsManagerMongo.js"
 import { createHash, isValidPassword } from '../utils.js'
 import GithubStrategy from 'passport-github2'
 
 const LocalStrategy = local.Strategy
 const userService = new UsersManagerMongo()
+const cartService = new CartManagerMongo()
 
 export const initPassport = () => {
     passport.use('github', new GithubStrategy({
@@ -17,11 +19,13 @@ export const initPassport = () => {
         try {
             let user = await userService.getUserBy({email: profile._json.email})
             if (!user) {
+                let newCart = await cartService.createCart()
                 let newUser = {
                     first_name: profile._json.name,
                     last_name: profile._json.name,
                     email: profile._json.email,
-                    password: ''
+                    password: '',
+                    cartID: newCart._id
                 }
                 let result = await userService.createUser(newUser)
                 done(null, result)
@@ -59,11 +63,13 @@ export const initPassport = () => {
                 console.log('el usuario ya existe')
                 return done(null, false)
             }
+            let newCart = await cartService.createCart()
             let newUser = {
                 first_name,
                 last_name,
                 email: username,
-                password: createHash(password)
+                password: createHash(password),
+                cartID: newCart._id
             }
             let result = await userService.createUser(newUser)
             return done(null, result)

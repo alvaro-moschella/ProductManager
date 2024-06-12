@@ -14,10 +14,16 @@ const userSchema = new Schema({
         required: true, 
         unique: true
     },
+    age: Number,
     password: String,
     role: {
         type: String,
+        enum: ['user', 'user_premium', 'admin'],
         default: 'user'
+    },
+    cartID: {
+        type: Schema.ObjectId,
+        ref: 'carts'
     }
 })
 
