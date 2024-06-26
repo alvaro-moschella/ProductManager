@@ -1,12 +1,12 @@
 import passport from "passport"
 import local from "passport-local"
-import { UsersManagerMongo } from "../dao/usersManagerMongo.js"
+import { UsersDaoMongo } from "../dao/usersDao.mongo.js"
 import CartManagerMongo from "../dao/cartsManagerMongo.js"
 import { createHash, isValidPassword } from '../utils/utils.js'
 import GithubStrategy from 'passport-github2'
 
 const LocalStrategy = local.Strategy
-const userService = new UsersManagerMongo()
+const userService = new UsersDaoMongo()
 const cartService = new CartManagerMongo()
 
 export const initPassport = () => {
@@ -25,7 +25,7 @@ export const initPassport = () => {
                     last_name: profile._json.name,
                     email: profile._json.email,
                     password: '',
-                    cartID: newCart._id
+                    cart: newCart._id
                 }
                 let result = await userService.createUser(newUser)
                 done(null, result)
@@ -69,7 +69,7 @@ export const initPassport = () => {
                 last_name,
                 email: username,
                 password: createHash(password),
-                cartID: newCart._id
+                cart: newCart._id
             }
             let result = await userService.createUser(newUser)
             return done(null, result)
