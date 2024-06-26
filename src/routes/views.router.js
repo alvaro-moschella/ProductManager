@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { productListUpdated } from '../socket.js'
 const router = Router()
-import { __dirname, buildPaginatedResponse } from '../utils.js'
+import { __dirname, buildPaginatedResponse } from '../utils/utils.js'
 import ProductsManagerMongo from '../dao/productsManagerMongo.js'
 import CartManagerMongo from '../dao/cartsManagerMongo.js'
 

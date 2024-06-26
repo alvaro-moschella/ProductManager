@@ -1,5 +1,5 @@
 import { Server } from 'socket.io'
-import { __dirname } from './utils.js'
+import { __dirname } from './utils/utils.js'
 
 import ProductManager from './dao/ProductManagerFS.js'
 

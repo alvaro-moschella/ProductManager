@@ -2,7 +2,7 @@ import passport from "passport"
 import local from "passport-local"
 import { UsersManagerMongo } from "../dao/usersManagerMongo.js"
 import CartManagerMongo from "../dao/cartsManagerMongo.js"
-import { createHash, isValidPassword } from '../utils.js'
+import { createHash, isValidPassword } from '../utils/utils.js'
 import GithubStrategy from 'passport-github2'
 
 const LocalStrategy = local.Strategy
