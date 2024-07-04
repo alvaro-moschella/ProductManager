@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import { productListUpdated } from '../socket.js'
-import ProductManager from '../dao/ProductManagerFS.js'
-import { productsModel } from '../models/products.model.js'
-import ProductsManagerMongo from '../dao/productsManagerMongo.js'
-import { buildPaginatedResponse } from '../utils/utils.js'
+import { productListUpdated } from '../../socket.js'
+import ProductManager from '../../dao/ProductManagerFS.js'
+import { productsModel } from '../../models/products.model.js'
+import ProductsManagerMongo from '../../dao/productsManagerMongo.js'
+import { buildPaginatedResponse } from '../../utils/utils.js'
 const productManager = new ProductManager('productos.json')
 
 const router = Router()

@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { auth } from '../middlewares/auth.middleware.js'
+import { auth } from '../../middlewares/auth.middleware.js'
 import passport from 'passport'
 
 export const sessionsRouter = Router()

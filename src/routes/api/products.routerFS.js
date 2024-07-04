@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { productListUpdated } from '../socket.js'
+import { productListUpdated } from '../../socket.js'
 import ProductManager from '../ProductManager.js'
 const productManager = new ProductManager('productos.json')
 

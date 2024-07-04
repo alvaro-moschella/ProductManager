@@ -1,11 +1,9 @@
 import express from 'express'
 import handlebars from 'express-handlebars'
 
+import routerApp from './routes/index.js'
+
 import { __dirname } from './utils/utils.js'
-import productsRouter from './routes/products.router.js'
-import cartsRouter from './routes/carts.router.js'
-import viewsRouter from './routes/views.router.js'
-import { sessionsRouter } from './routes/sessions.router.js'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import passport from 'passport'
@@ -33,22 +31,12 @@ app.use(session({
 initPassport()
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(routerApp)
 
 app.engine('hbs', handlebars.engine({
     extname: '.hbs'
 }))
-app.set('views', __dirname+'/views')
+app.set('views', __dirname+'/../views')
 app.set('view engine', 'hbs')
-
-app.use('/api/products', productsRouter)
-app.use('/api/carts', cartsRouter)
-app.use('/api/sessions', sessionsRouter)
-
-app.use('/', viewsRouter);
-
-app.use((error, req, res, next) => {
-    console.log(error)
-    res.status(500).send('Error 500 en el server')
-})
 
 export default app
