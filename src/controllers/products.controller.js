@@ -17,7 +17,7 @@ class ProductController {
     }
     createProduct = async (req, res) => {
         const { body } = req
-        let result = await productsModel.create(body)
+        let result = await this.productService.createProduct(body)
 
         if (!result) {
             return res.status(401).json({
@@ -33,9 +33,9 @@ class ProductController {
 
     updateProduct = async (req, res) => {
         const { pid } = req.params
-        const { body } = req
+        const body = req.body
         try {
-            const product = await productsModel.findByIdAndUpdate(pid, body)
+            const product = this.productService.updateProduct(pid, body)
             if (!product) {
                 return res.status(401).json({
                     status: 'error',
@@ -51,10 +51,9 @@ class ProductController {
         }
     }
     deleteProduct = async (req, res) => {
-        const { id } = req.params
+        const { pid } = req.params
         try {
-          await productsModel.deleteOne({_id: id})
-          const products = await productManager.getProducts()
+          await this.productService.deleteProduct(pid)
           res.status(204).send()
         }catch(error) {
           throw new Error('Ocurrió un error al eliminar un producto', error.message)

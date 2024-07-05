@@ -2,7 +2,7 @@ import { userModel } from "../models/users.models.js"
 
 export class UsersDaoMongo {
     constructor() {
-      this.userModel = userModel;
+      this.userModel = userModel
     }
 
     async getUsers({limit = 10, numPage=1}) {
@@ -13,7 +13,7 @@ export class UsersDaoMongo {
     async createUser(newUser) {
         return await this.userModel.create(newUser)
     }
-  
+  s
     async getUserBy(filter) {
       return this.userModel.findOne( filter );
     }
@@ -21,6 +21,10 @@ export class UsersDaoMongo {
     async getUserByEmail(email) {
       return this.users.find((user) => user.email === email);
     }  
+
+    async updateUser(uid, userToUpdate) {
+      return this.userModel.findByIdAndUpdate({_id: uid}, userToUpdate)
+    }
   
   }
 
