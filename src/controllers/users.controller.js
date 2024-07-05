@@ -62,4 +62,14 @@ class UserController {
             res.status(500).json('Error al actualizar el usuario')
         }
     }
+
+    deleteUser = async (req, res) => {
+        const { uid } = req.params
+        try {
+            const result = await this.userService.deleteUser(uid)
+            res.status(204).send({status: 'success', payload: result})
+        } catch (error) {
+            res.status(500).json('Error al eliminar el usuario')
+        }
+    }
 }

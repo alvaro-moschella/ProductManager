@@ -22,7 +22,7 @@ class ProductsManagerMongo {
   }
 
   async deleteProduct(pid){        
-    await this.productsModel.deleteOne({_id: pid})        
+    return await this.productsModel.deleteOne({_id: pid})        
 }
 
 }

@@ -25,6 +25,9 @@ export class UsersDaoMongo {
     async updateUser(uid, userToUpdate) {
       return this.userModel.findByIdAndUpdate({_id: uid}, userToUpdate)
     }
-  
+    
+    async deleteUser(uid){        
+      return await this.userModel.deleteOne({_id: uid})        
+  }
   }
 

@@ -53,8 +53,8 @@ class ProductController {
     deleteProduct = async (req, res) => {
         const { pid } = req.params
         try {
-          await this.productService.deleteProduct(pid)
-          res.status(204).send()
+          const result = await this.productService.deleteProduct(pid)
+          res.status(204).send({status: 'success', payload: result})
         }catch(error) {
           throw new Error('Ocurrió un error al eliminar un producto', error.message)
         } 
