@@ -1,4 +1,4 @@
-class UserDTO {
+export default class UserDTO {
     constructor(newUser){
         this.first_name = newUser.nombre
         this.last_name  = newUser.apellido
@@ -7,5 +7,3 @@ class UserDTO {
         this.password   = `${newUser.nombre}123`
     }
 }
-
-module.exports = UserDTO
