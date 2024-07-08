@@ -4,6 +4,11 @@ import cartsRouter from './api/carts.router.js'
 import viewsRouter from './views.router.js'
 import { sessionsRouter } from './api/sessions.router.js'
 
+import UserRepository from '../repositories/user.repository.js'
+import { UsersDaoMongo } from '../dao/usersDao.mongo.js'
+UsersDaoMongo
+
+export const userService = new UserRepository(new UsersDaoMongo)
 const router = Router()
 
 router.use('/api/products', productsRouter)

@@ -6,12 +6,17 @@ export class UsersDaoMongo {
     }
 
     async getUsers({limit = 10, numPage=1}) {
-        const users =  await this.userModel.paginate({}, {limit, page: numPage, sort: {price: -1}, lean: true })
-        return users
+        // const users =  await this.userModel.paginate({}, {limit, page: numPage, sort: {price: -1}, lean: true })
+        // return users
+        return await this.userModel.find()
     }
   
     async createUser(newUser) {
-        return await this.userModel.create(newUser)
+      try {
+          return await this.userModel.create(newUser)
+      } catch (error) {
+          return new Error(error)
+      }
     }
   s
     async getUserBy(filter) {
